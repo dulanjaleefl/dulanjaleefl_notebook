@@ -13,14 +13,40 @@
   </head>
   <body>
   <body>
-    <h3>h3. Bootstrap heading</h3>
-      <a href="index.html"><button type="button" class="btn btn-primary">back</button></a>
-      <main>
-      <ul>
-          <li><a href="#">Note 01</a></li>
+    <!-- Header content -->
+    <h3>Note 01 - setting up a virtual linux machine using oracle virtual box</h3>
+    <a href="index.html"><button type="button" class="btn btn-outline-secondary">back</button></a>
+      
+    <!-- main content --> 
+    <main>  
+         <!-- step 01--> 
+        <p><b>Step 01</b> download</p>
+          <ul>
+          <a href="https://www.virtualbox.org/wiki/Downloads"><li>Oracle Virtual Box</li></a>
+            <a href="https://www.ubuntu.com/download/desktop"><li>Ubuntu Desktop</li></a>
+            </ul>
+        
+         <!-- step 02-->   
+        <p><b>Step 02</b> create virtual machine on the host</p>
+          <ul>
+          <li> Install VirtualBox ("Next, Next, Next, Wait, Finish")</li>
+            <li>Create a new virtual machine and attach the Ubuntu installation media</li>
+                <p>&#9913;open virtual box, and use <i>new</i> to create a new virtual machine</p>
+                <p>&#9913;virtual box &#45;&#45;&#62; settings &#45;&#45;&#62; storage &#45;&#45;&#62; mount ubuntu installation media to the attributes</p>
+                <li>Boot up and complete the Ubuntu installation</li>
+                    <li>after Ubunu installation, install guest additions</li>
+                    <li>update your machine</li>
+                    <samp>sudo apt-get update</br>
+                        sudo apt-get update</br>
+                        sudo apt-get dist-upgrade
+                    </samp>
+                   
           </ul>
       
-      </main>
+         <!-- helping media --> 
+        <p><b>Helping media</b><a href="https://www.youtube.com/watch?v=J1zKYtDpkYc"> How to Create a Linux (Ubuntu) Virtual Machine with VirtualBox on Windows</a></p>
+          
+    </main>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
