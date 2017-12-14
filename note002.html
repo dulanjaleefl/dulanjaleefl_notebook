@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>DulanjaleeFL</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+      <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+  <body>
+    <h3>Note 02 - Installing a ssh server </h3>
+     <a href="index.html"><button type="button" class="btn btn-outline-secondary">back</button></a>
+      
+      <main>  
+         <!-- step 01--> 
+        <p><b>Step 01</b>Install shh-server (inside guest)</p>
+          <ul>
+              <li>Open terminal in Linux and...</li>
+                <samp>sudo apt-get install openssh-server</samp>
+                <p>&#9913;this installs the ssh service which allows you to connect to your machine using ssh.</p>
+                <p>&#9913;this way you can connect to a remote terminal using a secure incripted connection and run commands.</p>
+          </ul>
+              
+        <!-- step 02-->       
+          <p><b>Step 02 </b>Edit windows host file (type in guset IP address and domin name)</p>   
+            <ul>
+                
+              <li>Check the IP address of your installed server </li>
+                <p>&#9913;make sure you have set the network settings of your VM machine to Bridge Adapter.</p>
+                <samp>ifconfig</samp>
+                <p>&#9913;when I typed the <i>ifconfig</i> command, I  got a message asking me to install the net-tools</p>
+                <p>&#9913;do as commanded. after you have installed the net-tools, go ahead and type the <i>ifconfig</i></p>
+                <p>&#9913;when you do that, you will see under <i>08, inet addr</i>line the respective IP address of your server.</p>
+              
+              <li>Go to windows host file and enter guest IP address with a respective domain name</li>
+                <p>&#9913;the host file of windows is located in the path, Computer, Local Disk, Windows, System32, Drivers, etc, host.</p>
+                 <samp>xxx.xxx.xx.xx domainname.dev</samp>
+                <p>&#9913;the easiest way to change the host file is to open the notepad as the adminstrator, and then navigate through the file system and open the host file in the notepad.</p>
+                <p>&#9913;you may have to change the IP adress in the host file, when you reboot the machine.</p>
+            </ul>
+          
+        <!-- step 03--> 
+        <p><b>Step 03</b> Installing a shh client (inside host)</p>
+                <p>&#9913;ssh client helps you connect to your server/VM without opening the server/VM.</p>
+          
+          <ul>
+              <li>Go to <a href= "https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">Putty Download Page</a></li>
+              <p>&#9913;download Putty.exe, Plink.exe, Pscp.exe, Putty.gen</p>
+              
+              <li>Go to <a href= "https://winscp.net/eng/download.php">Winscp.net</a></li>
+              <p>&#9913;go to download and then click on portable executable.</p>
+              
+              <li>Create a directory in the host(c drive) and place the downloaded files.</li>
+              
+            </ul>
+          
+          <!-- step 04--> 
+          <p><b>Step 04</b> Connect to VM through putty</p> 
+          <ul>
+                <p>&#9913;open putty.exe(the ssh-client)</p>
+              <p>&#9913;fill in your VM's IP address and save.</p>
+              <p>&#9913;go to Data and save the user name as anything you like, and click open.</p>
+              <p>&#9913;click yes for the finger print verify message you get</p>
+              <p>&#9913;provide the password of your VM's user, and log in to the VM as the respective user, using putty ssh-client</p>
+              <i>congradualtions now you are connected to your guest from the host using putty!</i>
+          </ul>
+              
+              
+        <!-- step 05--> 
+          <p><b>Step 05</b>Try Connecting to the VM through WinSCP</p> 
+          <ul>
+            <p>&#9913;unzip WinSCP</p>
+              <p>&#9913;extract the WinSCP.exe file to the directory you previously created.</p>
+              <p>&#9913;Open WinSCP, provide host name, user name and password, and login to VM</p>
+              <i>now you are connected to your guest from the host using WinSCP</i>
+              <i>WinSCP can be regarded as windows explorer for linux</i>
+              
+        </ul>
+          
+          
+          <!-- step 06--> 
+          <p><b>Step 06</b>Eliminating the password typing process when launching the ssh-client</p> 
+          <p>&#9913;this is done by setting up a public-private key authentication between our machine and the virtual machine.</p>
+          <ul>
+            <li>1. Create a public key for Windows machine</li>
+              <p>&#9913;launch puttygen.exe</p>
+              <p>&#9913;click on generate.</p>
+               <p>&#9913;save the generated public key and private key (without a password? YES.)in separate files in the folder.</p>
+              <p>&#9913;close puttygen</p>
+              
+              <li>2. Go to client terminal and create a directory under home, user , called .ssh</li>
+              <samp>mkdir ~/.ssh</samp>
+              
+              <li>3. open WinSCP and place public key in the VM</li>
+                <p>&#9913;navigate to the .ssh directory you just created using WinSCP file tree.</p>
+                <p>&#9913;create a new file inside .ssh directory called authorized_keys.</p>
+                <p>&#9913;open windows public key file, and copy everything  after rsa" upto the equal sign.</p>
+                <p>&#9913;comeback to the authorized_keys file in the linux machine, under home>user>.shh directory, and paste what you have copied according to the format shown below.</p>
+                <samp>(space)ssh-rsa(space)paste key here</samp>
+                <p>&#9913;save</p>
+                <i>now your public key is on the linux box</i>
+          
+                <li>4. Modify the permisiions on .ssh file</li>
+                <samp>chmod 600 ~/.ssh/authorized_keys</samp>
+                <p>&#9913;close putty</p>
+                <p>&#9913;close WinSCP</p>
+                
+                <li>5. restart putty and load private key</li>
+          
+                <li>6. restart winSCP and load private key</li>
+                <i>now you should be able to log in to the system without using the password</i></br>
+                <i>if you recieve a message saying "server refused our key" when trying to log in, delete the .ssh directory and repeate everything except 4(modifying permissions)</i>
+          
+            </ul>
+      
+            <p><b>Helping media</b><a href="https://www.youtube.com/watch?v=x_9YzG-BMrU"> How to setup node.js development environment on windows</a></p>
+    </main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>
